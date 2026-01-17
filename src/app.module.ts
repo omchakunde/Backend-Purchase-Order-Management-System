@@ -7,17 +7,25 @@ import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+
     TypeOrmModule.forRoot({
       type: 'postgres',
+
+      // ✅ THIS IS THE MOST IMPORTANT LINE
       url: process.env.DATABASE_URL,
+
+      // ✅ REQUIRED FOR RENDER POSTGRES
+      ssl: {
+        rejectUnauthorized: false,
+      },
+
       autoLoadEntities: true,
       synchronize: true,
-      ssl:
-        process.env.NODE_ENV === 'production'
-          ? { rejectUnauthorized: false }
-          : false,
     }),
+
     VendorsModule,
     PurchaseOrdersModule,
     PaymentsModule,
