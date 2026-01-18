@@ -1,4 +1,10 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 import { VendorStatus } from '../vendor.entity';
 
 export class CreateVendorDto {
@@ -10,9 +16,11 @@ export class CreateVendorDto {
   email: string;
 
   @IsNotEmpty()
+  @IsString()
   contactPerson: string;
 
   @IsNotEmpty()
+  @IsString()
   phone: string;
 
   @IsNumber()
